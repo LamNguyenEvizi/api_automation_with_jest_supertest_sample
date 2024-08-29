@@ -30,9 +30,18 @@ jobs:
           name: deploy
           command: '#e.g. ./deploy.sh'
 workflows:
-  build-and-test:
+  manual-build-and-test:
     jobs:
       - test-node
-    # - deploy:
-    #     requires:
+
+  scheduled-build-and-test:
+    triggers:
+      - schedule:
+          cron: "8 7 * * *" # Chạy vào 07:08 AM UTC mỗi ngày
+          filters:
+            branches:
+              only:
+                - main # Chỉ chạy trên nhánh `main`
+    jobs:
+      - test-node
     #       - test-node

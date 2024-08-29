@@ -30,9 +30,17 @@ jobs:
           name: deploy
           command: '#e.g. ./deploy.sh'
 workflows:
-  build-and-test:
+  manual-build-and-test:
     jobs:
       - test-node
-    # - deploy:
-    #     requires:
-    #       - test-node
+
+  scheduled-build-and-test:
+    triggers:
+      - schedule:
+          cron: "10 7 * * *" 
+          filters:
+            branches:
+              only:
+                - main 
+    jobs:
+      - test-node

@@ -37,7 +37,7 @@ workflows:
   scheduled-build-and-test:
     triggers:
       - schedule:
-          cron: "25 14 * * *"
+          cron: "42 9 * * *"
           filters:
             branches:
               only:
